@@ -1,31 +1,60 @@
-# Warmane 3.3.5a Guild Addons
+# Lausudo Custom Addons
 
-Two self-contained, shareable addons for the Wrath 3.3.5a client used by Warmane.
+Clean, shareable UI building blocks for the Wrath 3.3.5a client used by Warmane.
 
-- **Warmane Font Pack** registers a carefully licensed, curated set of readable fonts with LibSharedMedia.
-- **Crisp FCT** renders outgoing damage above compatible TidyPlates using a bundled atlas and shows only selected major incoming events.
-- **TidyPlates + Threat Plates** is an unmodified local Warmane 3.3.5a backport bundle required by Crisp FCT.
+[Download the latest release](https://github.com/CRSD-Lau/Lausudo-Custom-Addons/releases/latest) · [Browse the source](https://github.com/CRSD-Lau/Lausudo-Custom-Addons)
 
-## Installation
+![Crisp FCT damage preview on TidyPlates](docs/images/crisp-fct-tidyplates-preview.png)
 
-1. Download one of the ZIP files from `dist`.
-2. Extract the included `Interface` folder into the root of a **closed** Warmane 3.3.5a client.
-3. Enable the addon from the character-selection AddOns screen.
+*Crisp FCT on TidyPlates: high-contrast normal and critical hits remain readable in a busy scene.*
 
-`Crisp FCT` requires TidyPlates. Install the included **TidyPlates + Threat Plates** bundle first. It does not require ElvUI, SharedMedia, or any files from a player's `WTF` directory.
+## What is included
 
-Use `/crispfct test` with a selected target to preview outgoing text. Use `/crispfct testin` to preview the major-incoming-event stream. `/crispfct off` restores native world damage text; `/crispfct on` re-enables Crisp FCT.
+| Download | What it provides | Needed? |
+| --- | --- | --- |
+| **TidyPlates + Threat Plates** | Warmane 3.3.5a nameplate backports. TidyPlates supplies the exact target identity Crisp FCT needs. | Required for Crisp FCT |
+| **Crisp FCT** | Large, plate-attached outgoing hits, vertical crits, and filtered major incoming events. | Optional |
+| **Warmane Font Pack** | A curated, redistribution-safe collection of LibSharedMedia fonts. | Optional |
 
-## Privacy and release scope
+## Install
 
-Only the source-controlled files in `addons/`, `licenses/`, documentation, and build tool are included in releases. The build never reads or packages `WTF`, SavedVariables, Config.wtf, account data, screenshots, logs, or any other client-install files.
+1. Close World of Warcraft.
+2. Download and extract **TidyPlates + Threat Plates** into your Warmane client folder.
+3. Extract **Crisp FCT** and, if wanted, **Warmane Font Pack** to that same folder.
+4. The extracted folders must end up under `Interface\AddOns\`.
+5. Enable the addons at the character-selection AddOns screen, then log in.
 
-## Font licensing
+Each release ZIP already contains an `Interface` folder, so extracting it into the client root produces the correct structure.
 
-The font pack includes only fonts whose included licences allow redistribution. Each font's original licence is in `addons/WarmaneFontPack/licenses/`.
+## Crisp FCT
 
-The personal-use Gotham Narrow font and the old Gotham-derived combat-text atlas are intentionally excluded. Crisp FCT uses a newly generated PT Sans Narrow Bold atlas; that font is distributed under the SIL Open Font License, included in `licenses/OFL-PTSansNarrow.txt`.
+**Compatibility:** Crisp FCT requires **TidyPlates**. Threat Plates is supported when it runs on TidyPlates. This dependency allows each hit to stay with the correct creature instead of guessing when multiple enemies share a name.
 
-## Included nameplate backports
+| Command | Result |
+| --- | --- |
+| `/crispfct test` | Preview outgoing text on your selected target. |
+| `/crispfct testin` | Preview the major incoming-event stream. |
+| `/crispfct on` | Enable Crisp FCT. |
+| `/crispfct off` | Disable it and restore native world damage text. |
 
-`third_party/addons/` contains unmodified copies of the installed Warmane 3.3.5a backports: TidyPlates 6.5.0 and TidyPlates: Threat Plates 5.7. They are distributed as a separate ZIP and contain no SavedVariables data. See `third_party/README.md` for version, provenance, and licence information.
+## Fonts and licensing
+
+The font pack contains only fonts whose included licences allow redistribution; each original licence is preserved in `addons/WarmaneFontPack/licenses/`.
+
+The personal-use Gotham Narrow font and the original Gotham-derived combat-text atlas are not included. Crisp FCT instead uses a bundled PT Sans Narrow Bold atlas licensed under the SIL Open Font License.
+
+TidyPlates and Threat Plates are included as untouched Warmane 3.3.5a backports. Their version, provenance, and upstream licence details are in [third_party/README.md](third_party/README.md).
+
+## Privacy
+
+No `WTF` directory, SavedVariables file, account data, configuration, screenshots folder, logs, or personal UI profile is included in a release. The showcased image above was provided explicitly for this repository; it is not copied from the client installation.
+
+## Building from source
+
+Run the following from PowerShell at the repository root:
+
+```powershell
+.\tools\Build-Releases.ps1
+```
+
+The script rebuilds the release ZIPs and `SHA256SUMS.csv` in `dist/`.
