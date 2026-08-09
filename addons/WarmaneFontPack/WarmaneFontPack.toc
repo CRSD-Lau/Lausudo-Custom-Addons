@@ -1,0 +1,12 @@
+## Interface: 30300
+## Title: Warmane Font Pack
+## Notes: Curated redistributable fonts for Warmane 3.3.5a addons.
+## Version: 1.0.0
+## Author: Neil Mitchell
+## X-License: Individual font licenses in licenses/
+## OptionalDeps: LibSharedMedia-3.0
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua
+WarmaneFontPack.lua

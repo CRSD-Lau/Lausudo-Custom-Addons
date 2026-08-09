@@ -1,0 +1,5 @@
+dist/*.zip
+dist/verification/
+*.bak
+*.tmp
+
