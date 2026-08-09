@@ -16,19 +16,30 @@ Get-ChildItem -LiteralPath $verificationRoot -Force | Remove-Item -Recurse -Forc
 
 $packages = @(
 	@{ Name = 'Warmane-Font-Pack-1.0.0'; Addon = 'WarmaneFontPack' },
-	@{ Name = 'CrispFCT-Warmane-3.3.5a-1.0.0'; Addon = 'CrispFCT' }
+	@{ Name = 'CrispFCT-Warmane-3.3.5a-1.0.0'; Addon = 'CrispFCT' },
+	@{ Name = 'TidyPlates-and-ThreatPlates-Warmane-3.3.5a-6.5.0-5.7'; Addon = $null }
 )
 
 foreach ($package in $packages) {
 	$stage = Join-Path $verificationRoot $package.Name
-	$addonTarget = Join-Path $stage ('Interface\AddOns\' + $package.Addon)
-	New-Item -ItemType Directory -Force -Path $addonTarget | Out-Null
-	Get-ChildItem -LiteralPath (Join-Path $repoRoot ('addons\' + $package.Addon)) -Force |
-		Copy-Item -Destination $addonTarget -Recurse
+	if ($package.Addon) {
+		$addonTarget = Join-Path $stage ('Interface\AddOns\' + $package.Addon)
+		New-Item -ItemType Directory -Force -Path $addonTarget | Out-Null
+		Get-ChildItem -LiteralPath (Join-Path $repoRoot ('addons\' + $package.Addon)) -Force |
+			Copy-Item -Destination $addonTarget -Recurse
+	} else {
+		$addonsTarget = Join-Path $stage 'Interface\AddOns'
+		New-Item -ItemType Directory -Force -Path $addonsTarget | Out-Null
+		Get-ChildItem -LiteralPath (Join-Path $repoRoot 'third_party\addons') -Force |
+			Copy-Item -Destination $addonsTarget -Recurse
+	}
 	Copy-Item -LiteralPath (Join-Path $repoRoot 'README.md') -Destination (Join-Path $stage 'README.md')
 	Copy-Item -LiteralPath (Join-Path $repoRoot 'LICENSE') -Destination (Join-Path $stage 'LICENSE')
 	if ($package.Addon -eq 'WarmaneFontPack') {
 		Copy-Item -LiteralPath (Join-Path $repoRoot 'THIRD-PARTY-NOTICES.md') -Destination (Join-Path $stage 'THIRD-PARTY-NOTICES.md')
+	}
+	if (-not $package.Addon) {
+		Copy-Item -LiteralPath (Join-Path $repoRoot 'third_party\README.md') -Destination (Join-Path $stage 'THIRD-PARTY-NOTICES.md')
 	}
 	if ($package.Addon -eq 'CrispFCT') {
 		New-Item -ItemType Directory -Force -Path (Join-Path $stage 'LICENSES') | Out-Null
