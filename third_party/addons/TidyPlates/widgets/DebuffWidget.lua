@@ -652,8 +652,7 @@ local AuraBorderArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraFrame" --
 local AuraGlowArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\AuraGlow"
 local AuraHighlightArt = "Interface\\AddOns\\TidyPlatesWidgets\\Aura\\CCBorder" -- AuraBorderArt, AuraHighlightArt
 local AuraTestArt = ""
--- Keep aura countdowns and stack counts consistent with the rest of Lausudo's UI.
-local AuraFont = "Interface\\AddOns\\SharedMediaAdditionalFonts\\fonts\\GothamNarrow-Ultra.ttf"
+local AuraFont = "Interface\\Addons\\TidyPlates\\Media\\DefaultFont.ttf"
 
 local function Enable()
 	AuraMonitor:SetScript("OnEvent", CombatEventHandler)

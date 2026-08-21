@@ -95,13 +95,6 @@ local function SetObjectShape(object, width, height)
 	object:SetHeight(height)
 end
 local function SetObjectFont(object, font, size, flags)
-	-- Lausudo's character-specific Gotham treatment must live in the render
-	-- path.  Threat Plates otherwise falls back to its bundled media font while
-	-- plates are recycled, creating a visible default-font flash.
-	local characterKey = (UnitName("player") or "") .. " - " .. (GetRealmName() or "")
-	if _G.LausudoGothamManagedCharacters and _G.LausudoGothamManagedCharacters[characterKey] then
-		font = "Interface\\AddOns\\SharedMediaAdditionalFonts\\fonts\\GothamNarrow-Ultra.ttf"
-	end
 	object:SetFont(font, size, flags)
 end
 local function SetObjectJustify(object, horz, vert)

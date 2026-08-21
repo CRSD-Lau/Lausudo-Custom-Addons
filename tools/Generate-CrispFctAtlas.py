@@ -3,8 +3,8 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
-FONT = ROOT / "addons" / "CrispFCT" / "fonts" / "PTSansNarrow-Bold.ttf"
-OUTPUT = ROOT / "addons" / "CrispFCT" / "media" / "CrispFCTGlyphs.tga"
+FONT = ROOT / "packages" / "addons" / "CrispFCT" / "fonts" / "PTSansNarrow-Bold.ttf"
+OUTPUT = ROOT / "packages" / "addons" / "CrispFCT" / "media" / "CrispFCTGlyphs.tga"
 GLYPHS = "0123456789.KMB!-"
 CELL_WIDTH, HEIGHT = 64, 128
 
@@ -21,4 +21,3 @@ for index, glyph in enumerate(GLYPHS):
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 image.save(OUTPUT)
 print(OUTPUT)
-

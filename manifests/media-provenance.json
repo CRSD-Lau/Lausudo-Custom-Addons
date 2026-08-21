@@ -1,0 +1,42 @@
+{
+  "$schema": "./media-provenance.schema.json",
+  "schemaVersion": 1,
+  "allowedRoots": [
+    {
+      "path": "packages/addons/CrispFCT/fonts",
+      "source": "PT Sans Narrow Bold",
+      "license": "SIL-OFL-1.1",
+      "licensePath": "licenses/OFL-PTSansNarrow.txt"
+    },
+    {
+      "path": "packages/addons/CrispFCT/media",
+      "source": "Generated locally from the bundled OFL font by tools/Generate-CrispFctAtlas.py",
+      "license": "SIL-OFL-1.1",
+      "licensePath": "licenses/OFL-PTSansNarrow.txt"
+    },
+    {
+      "path": "packages/addons/WarmaneFontPack/fonts",
+      "source": "Redistributable font collection",
+      "license": "Mixed redistributable font licenses",
+      "licensePath": "packages/addons/WarmaneFontPack/licenses"
+    },
+    {
+      "path": "third_party/addons/TidyPlates",
+      "source": "https://github.com/bkader/TidyPlates_WoTLK/commit/a668fc23d329356ad6e808fc084fd0f4094b43e3",
+      "license": "MIT",
+      "licensePath": "third_party/licenses/TidyPlates-MIT.txt"
+    },
+    {
+      "path": "third_party/addons/TidyPlates_ThreatPlates",
+      "source": "https://github.com/bkader/TidyPlates_WoTLK/commit/a668fc23d329356ad6e808fc084fd0f4094b43e3",
+      "license": "GPL-3.0-only",
+      "licensePath": "third_party/licenses/ThreatPlates-GPL-3.0.txt"
+    },
+    {
+      "path": "docs/images",
+      "source": "Image supplied explicitly for this public repository",
+      "license": "Repository documentation use permission",
+      "licensePath": "docs/images/README.md"
+    }
+  ]
+}

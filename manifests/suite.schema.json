@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons/raw/main/manifests/suite.schema.json",
+  "title": "Lausudo Warmane UI Suite manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "suiteVersion", "target", "components"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "suiteVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wowBuild", "architecture", "aspectRatios", "resolutions", "locales"],
+      "properties": {
+        "wowBuild": { "const": 12340 },
+        "architecture": { "const": "x86" },
+        "aspectRatios": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "enum": ["16:9"] }
+        },
+        "resolutions": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["width", "height", "status"],
+            "properties": {
+              "width": { "type": "integer", "minimum": 800 },
+              "height": { "type": "integer", "minimum": 600 },
+              "status": { "type": "string", "enum": ["supported", "reference"] }
+            }
+          }
+        },
+        "locales": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z]{2}[A-Z]{2}$" }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/component" }
+    }
+  },
+  "$defs": {
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "version", "kind", "distribution", "availability", "privacy", "source", "license", "destination", "expectedRoots"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "enum": ["addon", "font-pack", "weakauras", "preset", "runtime", "client-style", "private-media"] },
+        "distribution": { "type": "string", "enum": ["bundled", "download", "link-only", "detect-only"] },
+        "availability": { "type": "string", "enum": ["included", "external", "gated"] },
+        "privacy": { "type": "string", "enum": ["public", "licensed-third-party", "external-reference", "private-detect-only"] },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": { "type": "string" },
+            "url": { "type": "string", "format": "uri" },
+            "alternateUrls": {
+              "type": "array",
+              "items": { "type": "string", "format": "uri" }
+            },
+            "tag": { "type": "string" },
+            "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+            "asset": { "type": "string" },
+            "archivePath": { "type": "string" },
+            "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        },
+        "license": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "name", "redistributable", "notice"],
+          "properties": {
+            "id": { "type": "string", "minLength": 1 },
+            "name": { "type": "string", "minLength": 1 },
+            "redistributable": { "type": "boolean" },
+            "notice": { "type": ["string", "null"] }
+          }
+        },
+        "destination": { "type": ["string", "null"] },
+        "expectedRoots": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "notes": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "distribution": { "const": "bundled" } } },
+          "then": { "properties": { "source": { "type": "object", "required": ["path"], "properties": { "path": {} } } } }
+        },
+        {
+          "if": { "properties": { "distribution": { "const": "download" } } },
+          "then": { "properties": { "source": { "type": "object", "required": ["url", "asset", "archivePath", "sha256"], "properties": { "url": {}, "asset": {}, "archivePath": {}, "sha256": {} } } } }
+        },
+        {
+          "if": { "properties": { "distribution": { "enum": ["link-only", "detect-only"] } } },
+          "then": { "properties": { "source": { "type": "object", "required": ["url"], "properties": { "url": {} } } } }
+        }
+      ]
+    }
+  }
+}

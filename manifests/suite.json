@@ -1,0 +1,315 @@
+{
+  "$schema": "./suite.schema.json",
+  "schemaVersion": 1,
+  "suiteVersion": "2.0.0-rc.1",
+  "target": {
+    "wowBuild": 12340,
+    "architecture": "x86",
+    "aspectRatios": ["16:9"],
+    "resolutions": [
+      { "width": 1920, "height": 1080, "status": "supported" },
+      { "width": 2560, "height": 1440, "status": "reference" }
+    ],
+    "locales": ["enUS", "deDE", "esES", "frFR", "ruRU"]
+  },
+  "components": [
+    {
+      "id": "crisp-fct",
+      "name": "Crisp FCT",
+      "version": "1.1.0",
+      "kind": "addon",
+      "distribution": "bundled",
+      "availability": "included",
+      "privacy": "public",
+      "source": {
+        "path": "packages/addons/CrispFCT",
+        "url": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons"
+      },
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "redistributable": true,
+        "notice": "LICENSE"
+      },
+      "destination": "Interface\\AddOns\\CrispFCT",
+      "expectedRoots": ["Interface\\AddOns\\CrispFCT\\CrispFCT.toc"]
+    },
+    {
+      "id": "warmane-font-pack",
+      "name": "Warmane Font Pack",
+      "version": "1.0.0",
+      "kind": "font-pack",
+      "distribution": "bundled",
+      "availability": "included",
+      "privacy": "licensed-third-party",
+      "source": {
+        "path": "packages/addons/WarmaneFontPack",
+        "url": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons"
+      },
+      "license": {
+        "id": "LicenseRef-Mixed-Font-Licenses",
+        "name": "Individual redistributable font licenses",
+        "redistributable": true,
+        "notice": "packages/addons/WarmaneFontPack/licenses"
+      },
+      "destination": "Interface\\AddOns\\WarmaneFontPack",
+      "expectedRoots": ["Interface\\AddOns\\WarmaneFontPack\\WarmaneFontPack.toc"]
+    },
+    {
+      "id": "lausudo-style",
+      "name": "Lausudo Style",
+      "version": "2.0.0-rc.1",
+      "kind": "addon",
+      "distribution": "bundled",
+      "availability": "included",
+      "privacy": "public",
+      "source": {
+        "path": "packages/addons/LausudoStyle",
+        "url": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons"
+      },
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "redistributable": true,
+        "notice": "LICENSE"
+      },
+      "destination": "Interface\\AddOns\\LausudoStyle",
+      "expectedRoots": ["Interface\\AddOns\\LausudoStyle\\LausudoStyle.toc"]
+    },
+    {
+      "id": "tidyplates",
+      "name": "TidyPlates Kader backport",
+      "version": "6.5.0",
+      "kind": "addon",
+      "distribution": "bundled",
+      "availability": "included",
+      "privacy": "licensed-third-party",
+      "source": {
+        "path": "third_party/addons/TidyPlates",
+        "url": "https://github.com/bkader/TidyPlates_WoTLK",
+        "commit": "a668fc23d329356ad6e808fc084fd0f4094b43e3"
+      },
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "redistributable": true,
+        "notice": "third_party/licenses/TidyPlates-MIT.txt"
+      },
+      "destination": "Interface\\AddOns\\TidyPlates",
+      "expectedRoots": ["Interface\\AddOns\\TidyPlates\\TidyPlates.toc"]
+    },
+    {
+      "id": "threatplates",
+      "name": "Threat Plates Kader backport",
+      "version": "5.7",
+      "kind": "addon",
+      "distribution": "bundled",
+      "availability": "included",
+      "privacy": "licensed-third-party",
+      "source": {
+        "path": "third_party/addons/TidyPlates_ThreatPlates",
+        "url": "https://github.com/bkader/TidyPlates_WoTLK",
+        "commit": "a668fc23d329356ad6e808fc084fd0f4094b43e3"
+      },
+      "license": {
+        "id": "GPL-3.0-only",
+        "name": "GNU General Public License version 3",
+        "redistributable": true,
+        "notice": "third_party/licenses/ThreatPlates-GPL-3.0.txt"
+      },
+      "destination": "Interface\\AddOns\\TidyPlates_ThreatPlates",
+      "expectedRoots": ["Interface\\AddOns\\TidyPlates_ThreatPlates\\TidyPlates_ThreatPlates.toc"]
+    },
+    {
+      "id": "lausudo-visual-core",
+      "name": "Lausudo Visual Core WeakAuras",
+      "version": "2.0.0-rc.1",
+      "kind": "weakauras",
+      "distribution": "bundled",
+      "availability": "included",
+      "privacy": "public",
+      "source": {
+        "path": "packages/weakauras/visual-core/LausudoVisualCore",
+        "url": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons"
+      },
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "redistributable": true,
+        "notice": "LICENSE"
+      },
+      "destination": "Interface\\AddOns\\LausudoVisualCore",
+      "expectedRoots": ["Interface\\AddOns\\LausudoVisualCore\\LausudoVisualCore.toc"],
+      "notes": "Installed explicitly in game through the LausudoStyle command; no third-party import strings are bundled."
+    },
+    {
+      "id": "weakauras",
+      "name": "WeakAuras WotLK backport",
+      "version": "5.21.11",
+      "kind": "addon",
+      "distribution": "link-only",
+      "availability": "external",
+      "privacy": "external-reference",
+      "source": {
+        "url": "https://github.com/NoM0Re/WeakAuras-WotLK/releases/tag/5.21.11",
+        "tag": "5.21.11",
+        "commit": "4bf5c1e9638bf822ca23339f5e4f4bcdbb1e39c4"
+      },
+      "license": {
+        "id": "GPL-2.0-only",
+        "name": "GNU General Public License version 2",
+        "redistributable": false,
+        "notice": null
+      },
+      "destination": "Interface\\AddOns\\WeakAuras",
+      "expectedRoots": ["Interface\\AddOns\\WeakAuras\\WeakAuras.toc"],
+      "notes": "Required by Lausudo Visual Core; linked and detected only, never copied by this repository."
+    },
+    {
+      "id": "elvui",
+      "name": "ElvUI for Wrath 3.3.5a",
+      "version": "6.09",
+      "kind": "addon",
+      "distribution": "link-only",
+      "availability": "external",
+      "privacy": "external-reference",
+      "source": {
+        "url": "https://github.com/ElvUI-WotLK/ElvUI/tree/6.09",
+        "tag": "6.09",
+        "commit": "8c0ac9d0d87ba2c8aa5f9bfa3083d25569033af8"
+      },
+      "license": {
+        "id": "LicenseRef-Upstream-Terms",
+        "name": "Upstream terms; redistribution not assumed",
+        "redistributable": false,
+        "notice": null
+      },
+      "destination": "Interface\\AddOns\\ElvUI",
+      "expectedRoots": ["Interface\\AddOns\\ElvUI\\ElvUI.toc"]
+    },
+    {
+      "id": "project-zidras",
+      "name": "ElvUI ProjectZidras",
+      "version": "302cc9590a26",
+      "kind": "addon",
+      "distribution": "link-only",
+      "availability": "external",
+      "privacy": "external-reference",
+      "source": {
+        "url": "https://github.com/Zidras/ElvUI_ProjectZidras",
+        "commit": "302cc9590a26f818fc3fb66f8a6d15a1c5f84323"
+      },
+      "license": {
+        "id": "LicenseRef-No-Clear-Redistribution-Terms",
+        "name": "No clear repository-wide redistribution license found",
+        "redistributable": false,
+        "notice": null
+      },
+      "destination": "Interface\\AddOns\\ElvUI_ProjectZidras",
+      "expectedRoots": ["Interface\\AddOns\\ElvUI_ProjectZidras\\ElvUI_ProjectZidras.toc"]
+    },
+    {
+      "id": "hd-client-style",
+      "name": "Warmane 3.3.5a HD client style",
+      "version": "external",
+      "kind": "client-style",
+      "distribution": "link-only",
+      "availability": "external",
+      "privacy": "external-reference",
+      "source": {
+        "url": "https://drive.google.com/drive/folders/1qFm16l4AI5XhqZXVIi6JwMA_f5d4akY3?usp=drive_link",
+        "alternateUrls": ["https://discord.gg/646vhHNSJC"]
+      },
+      "license": {
+        "id": "LicenseRef-External-Client-Assets",
+        "name": "External source terms",
+        "redistributable": false,
+        "notice": null
+      },
+      "destination": null,
+      "expectedRoots": [],
+      "notes": "The suite links to the user's supplied source and validates local patch state; it never mirrors or downloads MPQs."
+    },
+    {
+      "id": "reshade",
+      "name": "ReShade",
+      "version": "6.7.3",
+      "kind": "runtime",
+      "distribution": "link-only",
+      "availability": "external",
+      "privacy": "external-reference",
+      "source": { "url": "https://reshade.me/" },
+      "license": {
+        "id": "LicenseRef-Upstream-Terms",
+        "name": "Official ReShade distribution terms",
+        "redistributable": false,
+        "notice": null
+      },
+      "destination": null,
+      "expectedRoots": []
+    },
+    {
+      "id": "lausudo-reshade-preset",
+      "name": "Lausudo ReShade preset",
+      "version": "permission-gated",
+      "kind": "preset",
+      "distribution": "detect-only",
+      "availability": "gated",
+      "privacy": "external-reference",
+      "source": { "url": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons/blob/main/docs/GRAPHICS.md" },
+      "license": {
+        "id": "LicenseRef-Permission-Pending",
+        "name": "Modified third-party preset; redistribution permission pending",
+        "redistributable": false,
+        "notice": "docs/PROVENANCE.md"
+      },
+      "destination": null,
+      "expectedRoots": [],
+      "notes": "No preset, shader, LUT, addon or binary is bundled while the provenance gate is closed."
+    },
+    {
+      "id": "dxvk",
+      "name": "DXVK 32-bit D3D9 runtime",
+      "version": "2.7.1",
+      "kind": "runtime",
+      "distribution": "download",
+      "availability": "external",
+      "privacy": "licensed-third-party",
+      "source": {
+        "url": "https://github.com/doitsujin/dxvk/releases/download/v2.7.1/dxvk-2.7.1.tar.gz",
+        "tag": "v2.7.1",
+        "asset": "dxvk-2.7.1.tar.gz",
+        "archivePath": "dxvk-2.7.1/x32/d3d9.dll",
+        "sha256": "d85ce7c79f57ecd765aaa1b9e7007cb875e6fde9f6d331df799bce73d513ce87"
+      },
+      "license": {
+        "id": "Zlib",
+        "name": "zlib License",
+        "redistributable": true,
+        "notice": "https://github.com/doitsujin/dxvk/blob/v2.7.1/LICENSE"
+      },
+      "destination": "d3d9.dll",
+      "expectedRoots": ["d3d9.dll"],
+      "notes": "Optional and off by default; the installer downloads only the pinned official archive and extracts the 32-bit D3D9 library."
+    },
+    {
+      "id": "private-visual-media",
+      "name": "User-supplied private visual media",
+      "version": "detect-only",
+      "kind": "private-media",
+      "distribution": "detect-only",
+      "availability": "external",
+      "privacy": "private-detect-only",
+      "source": { "url": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons/blob/main/docs/PRIVATE-ASSETS.md" },
+      "license": {
+        "id": "LicenseRef-User-Supplied-Only",
+        "name": "Not redistributed",
+        "redistributable": false,
+        "notice": null
+      },
+      "destination": null,
+      "expectedRoots": [],
+      "notes": "Gotham, Melli, ToxiUI media, MartyMods shaders and LUTs are never copied or uploaded."
+    }
+  ]
+}

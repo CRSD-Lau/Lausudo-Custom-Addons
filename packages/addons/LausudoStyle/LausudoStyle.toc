@@ -1,0 +1,14 @@
+## Interface: 30300
+## Title: Lausudo Style
+## Notes: Privacy-safe, opt-in ElvUI style installer for Warmane 3.3.5a.
+## Version: 2.0.0-rc.1
+## Author: Neil Mitchell
+## RequiredDeps: ElvUI
+## OptionalDeps: ElvUI_OptionsUI, WarmaneFontPack, TidyPlates_ThreatPlates, LausudoVisualCore
+## SavedVariables: LausudoStyleDB
+## X-License: MIT
+
+Core.lua
+Profile.lua
+ThreatPlates.lua
+Installer.lua

@@ -1,0 +1,82 @@
+{
+  "$schema": "./hd-patches.schema.json",
+  "schemaVersion": 1,
+  "profile": "Lausudo HD visual patch state",
+  "locales": ["enUS", "deDE", "esES", "frFR", "ruRU"],
+  "patches": [
+    { "id": "addon-support", "label": "HD addon support", "pathTemplate": "patch-5.mpq", "state": "enabled", "bytes": 4758843, "sha256": null },
+    { "id": "world-textures", "label": "HD world textures", "pathTemplate": "patch-6.mpq", "state": "enabled", "bytes": 2373133892, "sha256": null },
+    { "id": "armor-models", "label": "HD armor models", "pathTemplate": "patch-7.mpq", "state": "disabled", "bytes": 1343956822, "sha256": null },
+    { "id": "weapon-models", "label": "HD weapon models", "pathTemplate": "patch-8.mpq", "state": "enabled", "bytes": 212094542, "sha256": null },
+    { "id": "character-models", "label": "HD character models", "pathTemplate": "patch-a.mpq", "state": "enabled", "bytes": 2252223733, "sha256": null },
+    { "id": "blood", "label": "Blood patch", "pathTemplate": "patch-b.mpq", "state": "disabled", "bytes": 1668084, "sha256": null },
+    { "id": "screens-and-accounts", "label": "Screens and account visuals", "pathTemplate": "patch-c.mpq", "state": "enabled", "bytes": 482467019, "sha256": null },
+    { "id": "music", "label": "HD music", "pathTemplate": "patch-e.mpq", "state": "enabled", "bytes": 261871142, "sha256": null },
+    { "id": "models-and-npcs", "label": "HD models and NPCs", "pathTemplate": "patch-f.mpq", "state": "enabled", "bytes": 2221967166, "sha256": null },
+    { "id": "icons", "label": "HD icons", "pathTemplate": "patch-i.mpq", "state": "enabled", "bytes": 6531615, "sha256": null },
+    { "id": "mop-character-create", "label": "MoP character creation", "pathTemplate": "patch-j.mpq", "state": "disabled", "bytes": 13363718, "sha256": null },
+    { "id": "shadowlands-character-create", "label": "Shadowlands character creation", "pathTemplate": "patch-k.mpq", "state": "enabled", "bytes": 4881509, "sha256": null },
+    { "id": "spells", "label": "HD spells", "pathTemplate": "patch-s.mpq", "state": "enabled", "bytes": 166341703, "sha256": null },
+    { "id": "trees", "label": "HD trees", "pathTemplate": "patch-t.mpq", "state": "enabled", "bytes": 736709383, "sha256": null },
+    { "id": "undead-model", "label": "Undead model without bones", "pathTemplate": "patch-u.mpq", "state": "enabled", "bytes": 36700340, "sha256": null },
+    { "id": "water", "label": "HD water", "pathTemplate": "patch-w.mpq", "state": "enabled", "bytes": 27646368, "sha256": null },
+    { "id": "sky", "label": "HD sky", "pathTemplate": "patch-x.mpq", "state": "enabled", "bytes": 90237328, "sha256": null },
+    { "id": "additional-visual-y", "label": "Additional visual patch Y", "pathTemplate": "patch-y.mpq", "state": "enabled", "bytes": 18440241, "sha256": null },
+    {
+      "id": "locale-interface",
+      "label": "Localized interface windows",
+      "pathTemplate": "{locale}\\patch-{locale}-9.mpq",
+      "state": "enabled",
+      "bytes": null,
+      "bytesByLocale": { "enUS": 8012905, "deDE": 8067346, "esES": 8037574, "frFR": 8037545, "ruRU": 7975440 }
+    },
+    { "id": "locale-character", "label": "Localized HD characters", "pathTemplate": "{locale}\\patch-{locale}-a.mpq", "state": "enabled", "bytes": 32930769 },
+    {
+      "id": "locale-screens",
+      "label": "Localized screens and accounts",
+      "pathTemplate": "{locale}\\patch-{locale}-c.mpq",
+      "state": "enabled",
+      "bytes": null,
+      "bytesByLocale": { "enUS": 5019723, "deDE": 5019723, "esES": 5019723, "frFR": 5015959, "ruRU": 5025119 }
+    },
+    {
+      "id": "locale-interface-art",
+      "label": "Localized cursor and interface art",
+      "pathTemplate": "{locale}\\patch-{locale}-d.mpq",
+      "state": "enabled",
+      "bytes": null,
+      "bytesByLocale": { "enUS": 1468095, "deDE": 1430698, "esES": 1430719, "frFR": 1468244, "ruRU": 1393165 }
+    },
+    { "id": "locale-models", "label": "Localized HD model data", "pathTemplate": "{locale}\\patch-{locale}-f.mpq", "state": "enabled", "bytes": 15458128 },
+    { "id": "locale-mop-create", "label": "Localized MoP character creation", "pathTemplate": "{locale}\\patch-{locale}-j.mpq", "state": "disabled", "bytes": 13363718 },
+    { "id": "locale-sl-create", "label": "Localized Shadowlands character creation", "pathTemplate": "{locale}\\patch-{locale}-k.mpq", "state": "enabled", "bytes": 4729876 },
+    {
+      "id": "locale-dungeon-maps",
+      "label": "Localized dungeon maps",
+      "pathTemplate": "{locale}\\patch-{locale}-m.mpq",
+      "state": "enabled",
+      "bytes": null,
+      "bytesByLocale": { "enUS": 53431239, "deDE": 53408221, "esES": 53434703, "frFR": 53413218, "ruRU": 53744109 }
+    },
+    {
+      "id": "locale-dungeon-minimaps",
+      "label": "Localized dungeon minimaps",
+      "pathTemplate": "{locale}\\patch-{locale}-n.mpq",
+      "state": "disabled",
+      "bytes": null,
+      "bytesByLocale": { "enUS": 25156936, "deDE": 25068845, "esES": 25070025, "frFR": 25087673, "ruRU": 23602253 }
+    },
+    {
+      "id": "locale-loading-screens",
+      "label": "Localized loading screens",
+      "pathTemplate": "{locale}\\patch-{locale}-q.mpq",
+      "state": "enabled",
+      "bytes": null,
+      "bytesByLocale": { "enUS": 38886999, "deDE": 40947702, "esES": 40947697, "frFR": 40947812, "ruRU": 40939924 }
+    },
+    { "id": "locale-spells", "label": "Localized spell visuals", "pathTemplate": "{locale}\\patch-{locale}-s.mpq", "state": "enabled", "bytes": 17695188 },
+    { "id": "locale-undead", "label": "Localized undead model", "pathTemplate": "{locale}\\patch-{locale}-u.mpq", "state": "enabled", "bytes": 37045038 },
+    { "id": "locale-water", "label": "Localized water", "pathTemplate": "{locale}\\patch-{locale}-w.mpq", "state": "enabled", "bytes": 27646368 },
+    { "id": "locale-sky", "label": "Localized sky", "pathTemplate": "{locale}\\patch-{locale}-x.mpq", "state": "enabled", "bytes": 90237328 }
+  ]
+}

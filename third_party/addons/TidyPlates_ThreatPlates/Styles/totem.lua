@@ -69,7 +69,7 @@ local function CreateStyle(self, event, ...)
 			show = db.eliteicon.show
 		}
 		config.castborder = {
-			texture = path .. (db.castborder.texture or "TP_CastBarOverlay"),
+			texture = path .. "TP_CastBarOverlay",
 			width = width * 2.1333,
 			height = height * 6.4,
 			x = db.castborder.x,

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons/raw/main/manifests/wa-code-review.schema.json",
+  "title": "WeakAuras custom-code review records",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "reviewedFiles"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "reviewedFiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "status", "reviewedAt", "reviewer", "notes"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^packages/weakauras/.+\\.lua$" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "status": { "const": "approved" },
+          "reviewedAt": { "type": "string", "format": "date" },
+          "reviewer": { "type": "string", "minLength": 1 },
+          "notes": { "type": "string", "minLength": 20 }
+        }
+      }
+    }
+  }
+}

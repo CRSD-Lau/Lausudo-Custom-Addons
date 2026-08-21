@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/CRSD-Lau/Lausudo-Custom-Addons/raw/main/manifests/hd-patches.schema.json",
+  "title": "Lausudo HD patch state manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profile", "locales", "patches"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "profile": { "type": "string", "minLength": 1 },
+    "locales": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z]{2}[A-Z]{2}$" }
+    },
+    "patches": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label", "pathTemplate", "state", "bytes"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "label": { "type": "string", "minLength": 1 },
+          "pathTemplate": { "type": "string", "minLength": 1 },
+          "state": { "type": "string", "enum": ["enabled", "disabled"] },
+          "bytes": { "type": ["integer", "null"], "minimum": 1 },
+          "bytesByLocale": {
+            "type": "object",
+            "propertyNames": { "pattern": "^[a-z]{2}[A-Z]{2}$" },
+            "additionalProperties": { "type": "integer", "minimum": 1 }
+          },
+          "sha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+          "sha256ByLocale": {
+            "type": "object",
+            "propertyNames": { "pattern": "^[a-z]{2}[A-Z]{2}$" },
+            "additionalProperties": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+          }
+        }
+      }
+    }
+  }
+}

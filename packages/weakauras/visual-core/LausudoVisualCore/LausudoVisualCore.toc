@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: Lausudo Visual Core
+## Notes: Explicit installer for original, reviewed Lausudo WeakAuras visuals.
+## Version: 2.0.0-rc.1
+## Author: Neil Mitchell
+## RequiredDeps: WeakAuras
+## SavedVariables: LausudoVisualCoreDB
+## X-License: MIT
+
+Core.lua

@@ -1,60 +1,100 @@
-# Lausudo Custom Addons
+# Lausudo Warmane UI Suite
 
-Clean, shareable UI building blocks for the Wrath 3.3.5a client used by Warmane.
+A privacy-first, reproducible visual setup for the Wrath 3.3.5a client used with Warmane. The repository contains original addons and visual profiles, clearly licensed third-party addons, a cautious PowerShell installer, dependency links, and read-only validators.
 
-[Download the latest release](https://github.com/CRSD-Lau/Lausudo-Custom-Addons/releases/latest) · [Browse the source](https://github.com/CRSD-Lau/Lausudo-Custom-Addons)
+The WoW client, HD patch contents, personal configuration, account state, SavedVariables, screenshots, logs, caches, private fonts, shaders, LUTs, and other unapproved media are not part of this project.
+
+> **Release status:** v2 is a release candidate under development. Existing v1 tags and release assets remain immutable. The repository will be renamed only after clean-client validation, privacy and license review, and visual signoff.
 
 ![Crisp FCT damage preview on TidyPlates](docs/images/crisp-fct-tidyplates-preview.png)
 
-*Crisp FCT on TidyPlates: high-contrast normal and critical hits remain readable in a busy scene.*
+## Included
 
-## What is included
+| Component | Treatment |
+| --- | --- |
+| LausudoStyle | Original ElvUI companion that creates a separate visual profile and can restore the previous profile |
+| Lausudo Visual Core | Small, newly authored WeakAuras visual pack installed only on explicit in-game command |
+| Crisp FCT | Original plate-attached combat text addon |
+| Warmane Font Pack | Redistribution-cleared LibSharedMedia fonts with original licenses |
+| TidyPlates and Threat Plates | Clean copies pinned to the Kader Wrath backport commit, with MIT and GPL notices |
 
-| Download | What it provides | Needed? |
-| --- | --- | --- |
-| **TidyPlates + Threat Plates** | Warmane 3.3.5a nameplate backports. TidyPlates supplies the exact target identity Crisp FCT needs. | Required for Crisp FCT |
-| **Crisp FCT** | Large, plate-attached outgoing hits, vertical crits, and filtered major incoming events. | Optional |
-| **Warmane Font Pack** | A curated, redistribution-safe collection of LibSharedMedia fonts. | Optional |
+ElvUI, ProjectZidras, and the maintained [WeakAuras WotLK backport](https://github.com/NoM0Re/WeakAuras-WotLK/releases/tag/5.21.11) are link/detect-only. HD patches, ReShade, DXVK, private media, and third-party WeakAuras packs are never enabled or bundled implicitly. See [the component manifest](manifests/suite.json) for the machine-readable distribution policy.
 
-## Install
+## Safe first run
 
-1. Close World of Warcraft.
-2. Download and extract **TidyPlates + Threat Plates** into your Warmane client folder.
-3. Extract **Crisp FCT** and, if wanted, **Warmane Font Pack** to that same folder.
-4. The extracted folders must end up under `Interface\AddOns\`.
-5. Enable the addons at the character-selection AddOns screen, then log in.
+Close the target client before any mutating action. Audit is the default and does not write:
 
-Each release ZIP already contains an `Interface` folder, so extracting it into the client root produces the correct structure.
+```powershell
+.\tools\Install-LausudoSuite.ps1 -WowPath '<client-folder>'
+```
 
-## Crisp FCT
+Preview the default UI installation without changing files:
 
-**Compatibility:** Crisp FCT requires **TidyPlates**. Threat Plates is supported when it runs on TidyPlates. This dependency allows each hit to stay with the correct creature instead of guessing when multiple enemies share a name.
+```powershell
+.\tools\Install-LausudoSuite.ps1 `
+  -WowPath '<client-folder>' `
+  -Action Install `
+  -Components UI `
+  -WhatIf
+```
+
+Install explicitly after reviewing the audit and preview:
+
+```powershell
+.\tools\Install-LausudoSuite.ps1 `
+  -WowPath '<client-folder>' `
+  -Action Install `
+  -Components UI
+```
+
+The installer does not read or write private configuration, client patch contents, logs, or screenshots. It validates build 12340 and x86, refuses to mutate a running target client, stages downloads outside the client, records exact hashes, and restores only receipt-owned files. Full behavior is documented in [Installation](docs/INSTALL.md) and [Privacy model](docs/PRIVACY.md).
+
+## In game
+
+Install the supported upstream ElvUI 6.09 first. Install the pinned WeakAuras WotLK dependency before using Lausudo Visual Core. Then enable `LausudoStyle` and use:
 
 | Command | Result |
 | --- | --- |
-| `/crispfct test` | Preview outgoing text on your selected target. |
-| `/crispfct testin` | Preview the major incoming-event stream. |
-| `/crispfct on` | Enable Crisp FCT. |
-| `/crispfct off` | Disable it and restore native world damage text. |
+| `/lausudostyle` | Open the ElvUI plugin installer |
+| `/lausudostyle apply safe` | Create/apply a new profile using redistribution-safe media |
+| `/lausudostyle apply private` | Use exact private media only when it is already present locally |
+| `/lausudostyle restore` | Restore the profile selected before Lausudo Style |
+| `/lausudowa install` | Explicitly install/update the reviewed original visual pack |
 
-## Fonts and licensing
+LausudoStyle never imports bindings, macros, chat, combat history, account mappings, character mappings, or existing private profiles. Supported visual QA targets are 1920×1080 and 2560×1440 at 16:9. Other aspect ratios receive a warning.
 
-The font pack contains only fonts whose included licences allow redistribution; each original licence is preserved in `addons/WarmaneFontPack/licenses/`.
+## Optional visuals
 
-The personal-use Gotham Narrow font and the original Gotham-derived combat-text atlas are not included. Crisp FCT instead uses a bundled PT Sans Narrow Bold atlas licensed under the SIL Open Font License.
+- HD patches remain external. The validator compares only expected filenames, enabled/disabled state, sizes, and optional hashes. It never downloads, renames, or modifies patch files.
+- ReShade is link-only. No binary, shader, LUT, or modified preset is included. The private preset remains gated until redistribution terms are documented.
+- DXVK is off by default. Explicit `GraphicsRuntime` installation downloads one pinned official archive and verifies SHA-256 before extracting only the x86 D3D9 runtime.
+- Gotham, Melli, ToxiUI media, MartyMods shaders, LUTs, and other private assets are detect-only and are never copied.
 
-TidyPlates and Threat Plates are included as untouched Warmane 3.3.5a backports. Their version, provenance, and upstream licence details are in [third_party/README.md](third_party/README.md).
+These components and private-server use are not represented as approved by Warmane. Users are responsible for reviewing the server rules and upstream terms that apply to them.
 
-## Privacy
-
-No `WTF` directory, SavedVariables file, account data, configuration, screenshots folder, logs, or personal UI profile is included in a release. The showcased image above was provided explicitly for this repository; it is not copied from the client installation.
-
-## Building from source
-
-Run the following from PowerShell at the repository root:
+## Development and release checks
 
 ```powershell
+npm ci
+npm run validate
+Invoke-Pester .\tests
 .\tools\Build-Releases.ps1
 ```
 
-The script rebuilds the release ZIPs and `SHA256SUMS.csv` in `dist/`.
+The release builder creates each archive twice with sorted entries and a fixed timestamp, requires identical SHA-256 results, and emits both text and CSV checksums. Release gates are tracked in [Release checklist](docs/RELEASE-CHECKLIST.md).
+
+## Documentation
+
+- [Installation and receipt safety](docs/INSTALL.md)
+- [Manual fallback](docs/MANUAL-INSTALL.md)
+- [Privacy and threat model](docs/PRIVACY.md)
+- [Dependencies, provenance, and licensing](docs/PROVENANCE.md)
+- [Private asset detection](docs/PRIVATE-ASSETS.md)
+- [HD validator](docs/HD-VALIDATOR.md)
+- [ReShade and DXVK boundaries](docs/GRAPHICS.md)
+- [Known style gaps](docs/STYLE-GAPS.md)
+- [Security policy](SECURITY.md)
+
+## License
+
+Project-owned code is MIT-licensed. Third-party addons, libraries, fonts, and media remain under their own terms; see [third-party notices](THIRD-PARTY-NOTICES.md), [pinned addon provenance](third_party/README.md), and the per-component license records.

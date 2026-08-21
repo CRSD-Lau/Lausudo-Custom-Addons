@@ -1,0 +1,14 @@
+{
+  "$schema": "./wa-code-review.schema.json",
+  "schemaVersion": 1,
+  "reviewedFiles": [
+    {
+      "path": "packages/weakauras/visual-core/LausudoVisualCore/Core.lua",
+      "sha256": "0668529876f1d90003c81081a81027a19bdc02ababac0783547a642c77c50bfd",
+      "status": "approved",
+      "reviewedAt": "2026-08-21",
+      "reviewer": "CRSD-Lau repository review",
+      "notes": "Original visual-only combat-state trigger; no network, file, chat, identity, account, realm, or dynamic-code behavior. Name and UID ownership checks prevent unrelated display overwrite."
+    }
+  ]
+}

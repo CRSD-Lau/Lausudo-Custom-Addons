@@ -1,12 +1,16 @@
-# Included TidyPlates backports
+# Pinned third-party addon sources
 
-This directory contains verbatim addon-code copies from the creator's local **Warmane 3.3.5a** client, included solely to satisfy Crisp FCT's TidyPlates dependency.
+This directory contains the two third-party addons intentionally redistributed by the v2 suite.
 
-| Addon | Installed backport version | Upstream project licence | Public source/project |
-| --- | --- | --- | --- |
-| TidyPlates | 6.5.0, Kader Backport | MIT | https://www.curseforge.com/wow/addons/tidy-plates |
-| TidyPlates: Threat Plates | 5.7, Kader Backport | GPL-3.0 | https://www.curseforge.com/wow/addons/tidy-plates-threat-plates |
+| Addon | Version | Source | Pin | License |
+| --- | --- | --- | --- | --- |
+| TidyPlates | 6.5.0, Kader backport | `bkader/TidyPlates_WoTLK/TidyPlates` | `a668fc23d329356ad6e808fc084fd0f4094b43e3` | MIT |
+| TidyPlates: Threat Plates | 5.7, Kader backport | `bkader/TidyPlates_WoTLK/TidyPlates_ThreatPlates` | `a668fc23d329356ad6e808fc084fd0f4094b43e3` | GPL-3.0-only |
 
-The addon source is deliberately unmodified. No `WTF` directory, account data, SavedVariables files, character profiles, screenshots, logs, or client configuration are included.
+The v2 trees were compared with the pinned public source after line-ending normalization. Locally modified render hooks and nested duplicate addon trees from the old installation-derived package were removed. Lausudo-specific styling now goes through public runtime profile APIs in the separate `LausudoStyle` addon.
 
-The GPL-3.0 Threat Plates source remains available in full in this repository as required by its upstream licence. TidyPlates and Threat Plates retain their upstream author and backport credits in their `.toc` files.
+- Source repository: https://github.com/bkader/TidyPlates_WoTLK/tree/a668fc23d329356ad6e808fc084fd0f4094b43e3
+- TidyPlates license metadata: https://www.curseforge.com/wow/addons/tidy-plates
+- Threat Plates license metadata: https://www.curseforge.com/wow/addons/tidy-plates-threat-plates
+
+No private configuration, SavedVariables, account or character mapping, screenshot, log, client binary, or patch content belongs in this directory. GPL complete source and the standalone license copy are retained in the public repository and release archive.

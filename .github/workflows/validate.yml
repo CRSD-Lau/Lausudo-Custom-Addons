@@ -1,0 +1,129 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "feat/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    name: Manifests, Lua, privacy, licenses, and history
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked development dependencies
+        run: npm ci
+
+      - name: Run public-tree validation
+        run: npm run validate
+
+      - name: Scan full Git history for secrets
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: "false"
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
+
+  pester:
+    name: Pester (${{ matrix.shell }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell:
+          - powershell
+          - pwsh
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked development dependencies
+        run: npm ci
+
+      - name: Install pinned Pester
+        shell: ${{ matrix.shell }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+          if ($PSVersionTable.PSEdition -eq 'Desktop') {
+            Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Scope CurrentUser -Force -ForceBootstrap | Out-Null
+          }
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name Pester -RequiredVersion 5.7.1 -Scope CurrentUser -Force -SkipPublisherCheck
+
+      - name: Run Pester suite
+        shell: ${{ matrix.shell }}
+        run: |
+          Import-Module Pester -RequiredVersion 5.7.1
+          Invoke-Pester -Path .\tests -CI -Output Detailed
+
+  release-tree:
+    name: Deterministic release tree
+    runs-on: windows-latest
+    needs:
+      - static
+      - pester
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked development dependencies
+        run: npm ci
+
+      - name: Build release archives twice
+        shell: pwsh
+        run: .\tools\Build-Releases.ps1
+
+      - name: Scan generated suite tree
+        shell: pwsh
+        run: |
+          $suite = Get-ChildItem -LiteralPath .\dist -Filter 'Lausudo-Warmane-UI-Suite-*.zip' -File
+          if (@($suite).Count -ne 1) { throw 'Expected exactly one suite archive.' }
+          $scanRoot = Join-Path $env:RUNNER_TEMP 'lausudo-release-scan'
+          Expand-Archive -LiteralPath $suite.FullName -DestinationPath $scanRoot
+          node .\tools\scan-public-tree.mjs --root $scanRoot
+
+          $gitleaksArchive = Join-Path $env:RUNNER_TEMP 'gitleaks_8.30.1_windows_x64.zip'
+          Invoke-WebRequest -Uri 'https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_windows_x64.zip' -OutFile $gitleaksArchive
+          $actual = (Get-FileHash -LiteralPath $gitleaksArchive -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne 'd29144deff3a68aa93ced33dddf84b7fdc26070add4aa0f4513094c8332afc4e') { throw 'Gitleaks archive hash mismatch.' }
+          $gitleaksRoot = Join-Path $env:RUNNER_TEMP 'gitleaks-8.30.1'
+          Expand-Archive -LiteralPath $gitleaksArchive -DestinationPath $gitleaksRoot
+          & (Join-Path $gitleaksRoot 'gitleaks.exe') detect --source $scanRoot --no-git --redact --no-banner --exit-code 1
+          if ($LASTEXITCODE -ne 0) { throw 'Generated release-tree secret scan failed.' }
+
+      - name: Upload candidate assets
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: lausudo-warmane-ui-suite-candidate
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 14

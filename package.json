@@ -1,0 +1,24 @@
+{
+  "name": "lausudo-warmane-ui-suite",
+  "version": "2.0.0-rc.1",
+  "private": true,
+  "description": "Validation tooling for the privacy-first Lausudo Warmane UI Suite.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "validate": "npm run validate:manifests && npm run validate:lua && npm run validate:licenses && npm run validate:workflows && npm run validate:privacy",
+    "validate:manifests": "node tools/validate-manifests.mjs",
+    "validate:lua": "node tools/validate-lua.mjs",
+    "validate:privacy": "node tools/scan-public-tree.mjs",
+    "validate:licenses": "node tools/validate-licenses.mjs",
+    "validate:workflows": "node tools/validate-workflows.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "luaparse": "0.3.1",
+    "yaml": "2.9.0"
+  }
+}
