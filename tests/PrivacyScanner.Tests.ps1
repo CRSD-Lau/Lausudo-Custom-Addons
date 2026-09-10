@@ -59,4 +59,17 @@ Describe 'Public-tree privacy scanner fail-closed fixtures' {
 		$result.ExitCode | Should -Not -Be 0
 		$result.Output | Should -Match 'Absolute local machine path found'
 	}
+
+	It 'rejects LoginUI filenames even when their contents look harmless' -TestCases @(
+		@{ FileName = 'loginui.lua' }
+		@{ FileName = 'LoGiNuI.lua' }
+		@{ FileName = 'old-LoginUI-copy.txt' }
+	) {
+		param($FileName)
+		$root = New-PrivacyScannerFixture -Path (Join-Path $TestDrive ('login-fixture-' + $FileName))
+		'-- synthetic fixture without any credentials' | Set-Content -LiteralPath (Join-Path $root $FileName) -Encoding UTF8
+		$result = Invoke-PrivacyScannerFixture -Path $root
+		$result.ExitCode | Should -Not -Be 0
+		$result.Output | Should -Match 'Sensitive login UI file is never public'
+	}
 }

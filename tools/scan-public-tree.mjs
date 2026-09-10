@@ -105,6 +105,10 @@ for (const file of files) {
   const extension = path.extname(file.full).toLowerCase();
   const stat = fs.statSync(file.full);
 
+  if (path.basename(lower).includes('loginui')) {
+    errors.push(`Sensitive login UI file is never public: ${relative}`);
+  }
+
   if (segments.some((segment) => deniedSegments.has(segment))) {
     errors.push(`Denied client/private path segment: ${relative}`);
   }

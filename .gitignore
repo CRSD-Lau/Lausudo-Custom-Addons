@@ -4,6 +4,9 @@ coverage/
 TestResults/
 .private-staging/
 
+# Login UI may contain credentials, including renamed backup variants.
+*[Ll][Oo][Gg][Ii][Nn][Uu][Ii]*
+
 docs/images/*-unreviewed.png
 *.bak
 *.tmp

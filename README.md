@@ -4,6 +4,8 @@ A privacy-first, reproducible visual setup for the Wrath 3.3.5a client used with
 
 The WoW client, HD patch contents, personal configuration, account state, SavedVariables, screenshots, logs, caches, private fonts, shaders, LUTs, and other unapproved media are not part of this project.
 
+Personal disaster recovery and public sharing use separate repositories. The private recovery project preserves the actual client and each character's settings; this public project contains reviewed shareable components. **This public installer is not an exact client backup.** See [Backup and sharing](docs/BACKUP-AND-SHARING.md).
+
 > **Release status:** v2 is a release candidate under development. Existing v1 tags and release assets remain immutable. The repository will be renamed only after clean-client validation, privacy and license review, and visual signoff.
 
 ![Crisp FCT damage preview on TidyPlates](docs/images/crisp-fct-tidyplates-preview.png)
