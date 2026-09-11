@@ -1,0 +1,33 @@
+name: Publish suite preview
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Exact preview tag from suite.json (v2.0.0-alpha.1)
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: suite-release
+  cancel-in-progress: false
+jobs:
+  preview:
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+      checks: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python tools/suite.py validate
+      - run: python -m unittest discover -s tests -v
+      - name: Build and publish verified preview
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: python tools/publish_preview.py

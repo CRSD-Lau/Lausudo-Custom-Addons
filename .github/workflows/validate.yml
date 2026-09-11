@@ -1,0 +1,30 @@
+name: Validate Lausudo Suite
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements-dev.txt
+      - run: python tools/suite.py validate
+      - run: python -m unittest discover -s tests -v
+      - run: python tools/suite.py build
+      - if: runner.os == 'Windows'
+        shell: powershell
+        run: ./tools/Build-Releases.ps1 -Module combat-text
+      - uses: actions/upload-artifact@v4
+        with:
+          name: suite-preview-${{ matrix.os }}
+          path: dist/*
+          retention-days: 7
