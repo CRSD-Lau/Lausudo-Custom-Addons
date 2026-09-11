@@ -23,7 +23,7 @@ jobs:
       - if: runner.os == 'Windows'
         shell: powershell
         run: ./tools/Build-Releases.ps1 -Module combat-text
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: suite-preview-${{ matrix.os }}
           path: dist/*
