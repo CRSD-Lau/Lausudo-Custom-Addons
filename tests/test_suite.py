@@ -29,6 +29,13 @@ class Packages(unittest.TestCase):
                      '/absolute', 'a//b', 'a\\b', 'C:/file', 'a/CON.txt', 'a/trailing.', 'a/space ', 'SavedVariables/a.lua']:
             with self.subTest(name=name), self.assertRaises(ValueError): suite.safe_name(name)
 
+    def test_windows_toc_case_rules(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / 'commands.lua').write_text('-- fixture')
+            self.assertTrue(suite.windows_file(root, 'Commands.lua'))
+            self.assertFalse(suite.windows_file(root, 'Missing.lua'))
+
     def test_credential_content_is_redacted(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / 'file.lua'

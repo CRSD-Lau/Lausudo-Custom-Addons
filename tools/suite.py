@@ -47,6 +47,18 @@ def read_public(path):
     return data
 
 
+def windows_file(folder, relative):
+    """Resolve TOC entries using the target Windows client's case rules."""
+    current = folder
+    for component in relative.split('/'):
+        if not current.is_dir(): return False
+        matches = [p for p in current.iterdir() if p.name.casefold() == component.casefold()]
+        if len(matches) != 1: return False
+        current = matches[0]
+        no_links(current)
+    return current.is_file()
+
+
 def resolve(modules, selected):
     result, visiting = [], set()
     def visit(key):
@@ -127,7 +139,8 @@ def validate(root=ROOT):
                 if line and not line.startswith('#'):
                     ref = line.replace('\\', '/')
                     safe_name(ref)
-                    if not (path.parent / ref).is_file(): raise ValueError('TOC entry missing')
+                    if not windows_file(path.parent, ref):
+                        raise ValueError('TOC entry missing or ambiguous: ' + path.relative_to(root).as_posix() + ' -> ' + ref)
     core = (root / 'addons/LausudoSuite/LausudoSuite.toc').read_text()
     if '## Version: ' + data['version'] not in core: raise ValueError('Suite version mismatch')
     if (root / '.git').exists():
