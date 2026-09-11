@@ -1,0 +1,11 @@
+## Interface: 30300
+## Title: Lausudo Suite
+## Notes: Module status and opt-in, reversible visual profiles.
+## Author: Neil Mitchell
+## Version: 2.0.0-alpha.1
+## OptionalDeps: ElvUI, TidyPlates_ThreatPlates, WarmaneFontPack, CrispFCT
+## SavedVariablesPerCharacter: LausudoSuiteDB
+## X-License: MIT
+
+Profiles.lua
+Core.lua

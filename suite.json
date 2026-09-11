@@ -1,0 +1,16 @@
+{
+  "name": "Lausudo Suite",
+  "version": "2.0.0-alpha.1",
+  "author": "Neil Mitchell",
+  "lastModifiedBy": "Neil Mitchell",
+  "client": "Wrath 3.3.5a (interface 30300)",
+  "modules": [
+    {"id": "core", "name": "Suite hub and visual profiles", "addons": ["addons/LausudoSuite"], "requires": [], "external": [], "status": "preview"},
+    {"id": "nameplates", "name": "TidyPlates and Threat Plates", "addons": ["third_party/addons/TidyPlates", "third_party/addons/TidyPlates_ThreatPlates"], "requires": [], "external": [], "status": "existing"},
+    {"id": "combat-text", "name": "Crisp FCT", "addons": ["addons/CrispFCT"], "requires": ["nameplates"], "external": [], "status": "existing"},
+    {"id": "fonts", "name": "Warmane Font Pack", "addons": ["addons/WarmaneFontPack"], "requires": [], "external": [], "status": "existing"},
+    {"id": "group-bubbles", "name": "Group-only speech bubbles", "addons": ["addons/LausudoGroupBubbles"], "requires": ["fonts"], "external": ["ElvUI"], "status": "preview; disabled by default"},
+    {"id": "paladin-range", "name": "Hand of Protection raid range", "addons": ["addons/LausudoHoPRange"], "requires": [], "external": ["ElvUI"], "status": "preview; disabled by default"},
+    {"id": "tank-threat", "name": "Tank target threat colors", "addons": ["addons/LausudoTankTargetThreat"], "requires": [], "external": ["ElvUI"], "status": "preview; disabled by default"}
+  ]
+}

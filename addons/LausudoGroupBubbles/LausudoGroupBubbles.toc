@@ -1,0 +1,13 @@
+## Interface: 30300
+## Title: Lausudo Group Bubbles
+## Notes: Shows speech bubbles only for your current party or raid members.
+## Author: Neil Mitchell
+## Version: 1.0.0
+## DefaultState: disabled
+## RequiredDeps: ElvUI
+## OptionalDeps: WarmaneFontPack
+## X-License: MIT
+## SavedVariablesPerCharacter: LausudoGroupBubblesDB
+
+ElvUIStyle.lua
+LausudoGroupBubbles.lua

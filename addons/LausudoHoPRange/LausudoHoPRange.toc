@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: Lausudo HoP Raid Range
+## Notes: Uses Hand of Protection range for a paladin's ElvUI raid-frame fader.
+## Author: Neil Mitchell
+## Version: 1.0.0
+## RequiredDeps: ElvUI
+## DefaultState: disabled
+## X-License: MIT
+
+LausudoHoPRange.lua

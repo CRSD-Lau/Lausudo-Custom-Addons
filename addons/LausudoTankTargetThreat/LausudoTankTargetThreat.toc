@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: Lausudo Tank Target Threat
+## Notes: Target-frame threat colors for tanking.
+## Author: Neil Mitchell
+## RequiredDeps: ElvUI
+## DefaultState: disabled
+## Version: 1.0.0
+## X-License: MIT
+
+LausudoTankTargetThreat.lua

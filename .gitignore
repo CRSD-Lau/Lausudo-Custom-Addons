@@ -2,3 +2,14 @@ dist/
 docs/images/*-unreviewed.png
 *.bak
 *.tmp
+__pycache__/
+.venv/
+.scratch/
+.private-staging/
+*[Ll][Oo][Gg][Ii][Nn][Uu][Ii]*
+[Ww][Tt][Ff]/
+**/[Ss]aved[Vv]ariables/
+**/[Cc]onfig.wtf
+*.zip
+*.7z
+*.rar
